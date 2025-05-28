@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Event Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    nav a {
+      margin-right: 15px;
+    }
+    #welcomeBanner {
+      background-color: lightblue;
+      padding: 10px;
+      text-align: center;
+    }
+    .highlight {
+      background-color: yellow;
+      padding: 3px;
+    }
+    .gallery-img {
+      border: 2px solid #333;
+      width: 100px;
+      height: auto;
+    }
+    table {
+      margin-top: 10px;
+    }
+    form {
+      margin-top: 20px;
+      padding: 15px;
+      border: 1px solid #ccc;
+      max-width: 500px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    output {
+      color: green;
+      font-weight: bold;
+    }
+    video {
+      display: block;
+      margin-top: 20px;
+    }
+    footer {
+      margin-top: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#events">Events</a>
+    <a href="#contact">Contact</a>
+    <a href="help.html" target="_blank">Help</a>
+  </nav>
+
+  <!-- Home Section -->
+  <section id="home">
+    <div id="welcomeBanner">
+      <h1>Welcome to the Community Event Portal</h1>
+      <p><span style="color: red; font-weight: bold;">Special Offer:</span> Get 20% off your first event!</p>
+      <p class="highlight">Register now to stay updated!</p>
+    </div>
+  </section>
+
+  <!-- Events Gallery -->
+  <section id="events">
+    <h2>Past Event Highlights</h2>
+    <table>
+      <caption>Community Event Gallery</caption>
+      <tr>
+        <td><img src="event1.jpg" class="gallery-img" alt="Music Fest" title="Music Fest 2023"></td>
+        <td><img src="event2.jpg" class="gallery-img" alt="Food Fair" title="Food Fair 2023"></td>
+        <td><img src="event3.jpg" class="gallery-img" alt="Art Show" title="Art Show 2023"></td>
+      </tr>
+      <tr>
+        <td><img src="event4.jpg" class="gallery-img" alt="Tech Meetup" title="Tech Meetup 2023"></td>
+        <td><img src="event5.jpg" class="gallery-img" alt="Book Fair" title="Book Fair 2023"></td>
+        <td><img src="event6.jpg" class="gallery-img" alt="Marathon" title="City Marathon 2023"></td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- Contact and Registration -->
+  <section id="contact">
+    <h2>Register for Upcoming Events</h2>
+    <form onsubmit="document.getElementById('confirmationMsg').value='✅ Registration submitted!'; return false;">
+      <label>Name:
+        <input type="text" name="name" placeholder="Enter your name" required autofocus>
+      </label>
+      <label>Email:
+        <input type="email" name="email" placeholder="Enter your email" required>
+      </label>
+      <label>Date:
+        <input type="date" name="date" required>
+      </label>
+      <label>Event Type:
+        <select name="eventType" required>
+          <option value="">--Select--</option>
+          <option value="music">Music</option>
+          <option value="food">Food</option>
+          <option value="tech">Tech</option>
+        </select>
+      </label>
+      <label>Message:
+        <textarea name="message" placeholder="Write something..."></textarea>
+      </label>
+      <button type="submit">Register</button>
+      <br><br>
+      <output id="confirmationMsg"></output>
+    </form>
+
+    <h3>Event Feedback</h3>
+    <form onsubmit="return false;">
+      <label>Phone Number:
+        <input type="text" id="phone" placeholder="123-456-7890" onblur="
+          if(!/^\d{3}-\d{3}-\d{4}$/.test(this.value)){
+            alert('Phone number must be in the format 123-456-7890');
+          }">
+      </label>
+      <label>Select Event:
+        <select id="eventDropdown" onchange="
+          var fee = this.options[this.selectedIndex].getAttribute('data-fee');
+          document.getElementById('eventFee').textContent = fee ? 'Fee: $' + fee : '';">
+          <option value="">-- Choose Event --</option>
+          <option data-fee='10'>Music</option>
+          <option data-fee='15'>Tech</option>
+        </select>
+      </label>
+      <p id="eventFee"></p>
+
+      <label>Feedback:
+        <textarea id="feedbackBox" onkeyup="
+          document.getElementById('charCount').textContent = this.value.length;" placeholder="Share your thoughts..."></textarea>
+      </label>
+      <p>Characters typed: <span id="charCount">0</span></p>
+
+      <img src="event1.jpg" alt="Event" width="100" ondblclick="this.style.width='200px';" style="cursor: pointer;">
+      <br><br>
+      <button onclick="alert('Thanks for your feedback!')">Submit Feedback</button>
+    </form>
+
+    <h3>Promo Video</h3>
+    <video width="320" controls oncanplay="document.getElementById('videoStatus').textContent='🎥 Video ready to play!';">
+      <source src="promo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <p id="videoStatus"></p>
+
+    <h3>Save Your Preferences</h3>
+    <label>Preferred Event Type:
+      <select id="preferredEvent" onchange="
+        localStorage.setItem('preferredEvent', this.value);
+        sessionStorage.setItem('sessionEvent', this.value);">
+        <option value="">-- Select --</option>
+        <option value="Music">Music</option>
+        <option value="Food">Food</option>
+        <option value="Tech">Tech</option>
+      </select>
+    </label>
+    <br><br>
+    <button onclick="
+      localStorage.clear();
+      sessionStorage.clear();
+      alert('Preferences cleared!');">Clear Preferences</button>
+
+    <h3>Find Nearby Events</h3>
+    <button onclick="
+      const out = document.getElementById('locationOutput');
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+          pos => out.textContent = 'Latitude: ' + pos.coords.latitude + ', Longitude: ' + pos.coords.longitude,
+          err => out.textContent = 'Unable to retrieve your location.',
+          {enableHighAccuracy: true, timeout: 5000, maximumAge: 0}
+        );
+      } else {
+        out.textContent = 'Geolocation not supported.';
+      }">Find Nearby Events</button>
+    <p id="locationOutput"></p>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Local Community Council</p>
+  </footer>
+
+  <!-- Page Load and Unload Scripts -->
+  <script>
+    // Restore saved preference
+    window.onload = function() {
+      const pref = localStorage.getItem("preferredEvent");
+      if(pref) {
+        document.getElementById("preferredEvent").value = pref;
+      }
+    };
+    // Warn before leaving
+    window.onbeforeunload = function () {
+      const name = document.querySelector("input[name='name']");
+      if (name && name.value.trim() !== '') {
+        return "Are you sure you want to leave? Your form may not be saved.";
+      }
+    };
+  </script>
+
+</body>
+</html>

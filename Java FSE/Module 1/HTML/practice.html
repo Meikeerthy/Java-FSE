@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Community Event Portal</title>
+  <style>
+    img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body background="background.jpg" text="black" link="blue" vlink="purple" alink="red">
+
+<center>
+  <!-- Navigation -->
+  <h2><font color="#003366">Community Event Portal</font></h2>
+  <p>
+    <a href="#home">Home</a> |
+    <a href="#events">Events</a> |
+    <a href="#contact">Contact</a> |
+    <a href="help.html" target="_blank">Help</a>
+  </p>
+
+  <!-- Welcome Section -->
+  <a name="home"></a>
+  <table width="80%" bgcolor="lightblue" cellpadding="10">
+    <tr><td align="center">
+      <h3>Welcome to the Community Event Portal</h3>
+      <p><font color="red"><b>Special Offer:</b></font> Get 20% off your first event!</p>
+      <p><font bgcolor="yellow">Register now to stay updated!</font></p>
+    </td></tr>
+  </table>
+
+  <!-- Events Gallery -->
+  <a name="events"></a>
+  <h3><font color="#003366">Past Event Highlights</font></h3>
+  <table border="0" cellpadding="10">
+    <tr>
+      <td><img src="musicfest.jpg" title="Music Fest 2023"></td>
+      <td><img src="foodfair.jpg" title="Food Fair 2023"></td>
+      <td><img src="artshow.jpg" title="Art Show 2023"></td>
+    </tr>
+    <tr>
+      <td><img src="techmeetup.jpeg" title="Tech Meetup 2023"></td>
+      <td><img src="bookfair.jpeg" title="Book Fair 2023"></td>
+      <td><img src="marathon.jpeg" title="Marathon 2023"></td>
+    </tr>
+  </table>
+
+  <!-- Contact / Registration -->
+  <a name="contact"></a>
+  <h3><font color="#003366">Register for Upcoming Events</font></h3>
+  <form onsubmit="document.getElementById('confirmationMsg').value='✅ Registration submitted!'; return false;">
+    <p><input type="text" name="name" placeholder="Enter your name" required autofocus></p>
+    <p><input type="email" name="email" placeholder="Enter your email" required></p>
+    <p><input type="date" name="date" required></p>
+    <p>
+      <select name="eventType" required>
+        <option value="">--Select Event--</option>
+        <option value="music">Music</option>
+        <option value="food">Food</option>
+        <option value="tech">Tech</option>
+      </select>
+    </p>
+    <p><textarea name="message" placeholder="Write something..."></textarea></p>
+    <p><input type="submit" value="Register"></p>
+    <p><output id="confirmationMsg"></output></p>
+  </form>
+
+  <!-- Feedback -->
+  <h3><font color="#003366">Event Feedback</font></h3>
+  <form onsubmit="return false;">
+    <p><input type="text" id="phone" placeholder="123-456-7890"
+      onblur="if(!/^\d{3}-\d{3}-\d{4}$/.test(this.value)){alert('Invalid phone number format');}"></p>
+
+    <p>
+      <select id="eventDropdown" onchange="
+        var fee = this.options[this.selectedIndex].getAttribute('data-fee');
+        document.getElementById('eventFee').textContent = fee ? 'Fee: ₹' + fee : '';">
+        <option value="">-- Choose Event --</option>
+        <option data-fee='100'>Music</option>
+        <option data-fee='150'>Tech</option>
+      </select>
+    </p>
+    <p id="eventFee"></p>
+
+    <p><textarea id="feedbackBox" placeholder="Share your thoughts..." onkeyup="document.getElementById('charCount').textContent = this.value.length;"></textarea></p>
+    <p>Characters typed: <span id="charCount">0</span></p>
+
+    <p>
+      <img src="musicfest.jpg" ondblclick="this.style.width='200px';" style="cursor: pointer;">
+    </p>
+    <p><input type="button" value="Submit Feedback" onclick="alert('Thanks for your feedback!')"></p>
+  </form>
+
+  <!-- Video -->
+  <h3><font color="#003366">Promo Video</font></h3>
+  <video width="320" controls oncanplay="document.getElementById('videoStatus').textContent='🎥 Video ready to play!';">
+    <source src="promo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <p id="videoStatus"></p>
+
+  <!-- Preferences -->
+  <h3><font color="#003366">Save Your Preferences</font></h3>
+  <p>
+    <select id="preferredEvent" onchange="localStorage.setItem('preferredEvent', this.value); sessionStorage.setItem('sessionEvent', this.value);">
+      <option value="">-- Select --</option>
+      <option value="Music">Music</option>
+      <option value="Food">Food</option>
+      <option value="Tech">Tech</option>
+    </select>
+  </p>
+  <p><input type="button" value="Clear Preferences" onclick="localStorage.clear(); sessionStorage.clear(); alert('Preferences cleared!');"></p>
+
+  <!-- Geolocation -->
+  <h3><font color="#003366">Find Nearby Events</font></h3>
+  <p>
+    <input type="button" value="Find Nearby Events" onclick="
+      const out = document.getElementById('locationOutput');
+      if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(
+          pos => out.textContent = 'Latitude: ' + pos.coords.latitude + ', Longitude: ' + pos.coords.longitude,
+          err => out.textContent = 'Location unavailable',
+          {enableHighAccuracy: true, timeout: 5000, maximumAge: 0}
+        );
+      } else {
+        out.textContent = 'Geolocation not supported';
+      }">
+  </p>
+  <p id="locationOutput"></p>
+
+  <!-- Footer -->
+  <hr width="80%">
+  <p><font color="gray">&copy; 2025 Local Community Council</font></p>
+</center>
+
+<!-- Preference and leave warning scripts -->
+<script>
+  window.onload = function() {
+    const pref = localStorage.getItem("preferredEvent");
+    if (pref) {
+      document.getElementById("preferredEvent").value = pref;
+    }
+  };
+  window.onbeforeunload = function () {
+    const name = document.querySelector("input[name='name']");
+    if (name && name.value.trim() !== '') {
+      return "Are you sure you want to leave? Your form may not be saved.";
+    }
+  };
+</script>
+
+</body>
+</html>

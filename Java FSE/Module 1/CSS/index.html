@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Local Community Event Portal - CSS3 Exercises</title>
+
+<!-- Task 5: Import Google Font -->
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+  /* ========== Task 2: CSS Syntax & Comments ========== */
+  /* Reset margin and padding globally */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  /* ========== Task 3: Selectors Playground ========== */
+  /* Element selector for all h2 */
+  h2 {
+    color: #2c3e50;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+  }
+
+  /* ID selector for main header */
+  #mainHeader {
+    background-color: #2980b9;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  /* Class selector for event cards */
+  .eventCard {
+    background-color: #ecf0f1;
+    border: 2px solid #3498db;
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    font-family: 'Roboto', sans-serif;
+  }
+
+  /* Grouping selector for h3 and p */
+  h3, p {
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 10px;
+    color: #34495e;
+  }
+
+  /* ========== Task 4: Color & Background Styling ========== */
+  body {
+    background-color: #dce6f1; /* fallback color */
+    background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Roboto', sans-serif;
+    color: #2c3e50;
+    padding: 20px;
+    line-height: 1.5;
+  }
+
+  /* Gradient for section headers */
+  h2.sectionHeader {
+    background: linear-gradient(90deg, #2980b9, #6dd5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* ========== Task 5: Typography ========== */
+  /* Main heading styles */
+  h1 {
+    font-family: 'Roboto', sans-serif;
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+  }
+
+  /* Description paragraph typography */
+  .description {
+    font-size: 1.2rem;
+    font-style: italic;
+    line-height: 1.7;
+    letter-spacing: 0.05em;
+    text-align: justify;
+  }
+
+  /* ========== Task 6: Link and List Styling ========== */
+  nav ul {
+    list-style-type: none; /* remove bullets */
+    padding-left: 0;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  nav li {
+    padding: 8px 15px;
+  }
+
+  nav li a {
+    text-decoration: none;
+    color: #2980b9;
+    font-weight: 600;
+  }
+
+  nav li a:link {
+    color: #2980b9;
+  }
+
+  nav li a:visited {
+    color: #8e44ad;
+  }
+
+  nav li a:hover {
+    color: #e74c3c;
+    text-decoration: underline;
+  }
+
+  nav li a:active {
+    color: #c0392b;
+  }
+
+  /* ========== Task 7: Table Styling ========== */
+  table {
+    width: 90%;
+    margin: 20px auto 40px auto;
+    border-collapse: collapse;
+    text-align: center;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  th, td {
+    border: 1px solid #2980b9;
+    padding: 12px 20px;
+  }
+
+  th {
+    background-color: #2980b9;
+    color: white;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #d6eaf8;
+  }
+
+  /* ========== Task 8: Box Model & Layout Control ========== */
+  /* Padding, margin, border on event cards already defined */
+
+  /* Outline to highlight form fields */
+  input:focus, textarea:focus {
+    outline: 3px solid #27ae60;
+  }
+
+  /* Visibility vs display example */
+  .visible-box {
+    background-color: #55efc4;
+    width: 90%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 15px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .hidden-box {
+    visibility: hidden; /* invisible but space remains */
+    background-color: #ffeaa7;
+    width: 90%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 15px;
+    text-align: center;
+  }
+  .none-box {
+    display: none; /* removed from layout */
+    background-color: #fab1a0;
+    width: 90%;
+    max-width: 400px;
+    margin: 10px auto;
+    padding: 15px;
+    text-align: center;
+  }
+
+  /* ========== Task 9: Multiple Columns in Text ========== */
+  .multi-column {
+    column-count: 2;
+    column-gap: 30px;
+    column-rule: 1px solid gray;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 900px;
+    margin: 40px auto;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  /* ========== Task 10: Responsive Design with Media Queries & Flexbox ========== */
+  nav ul {
+    flex-wrap: wrap;
+  }
+
+  @media (max-width: 768px) {
+    body {
+      font-size: 16px;
+    }
+
+    h1 {
+      font-size: 2rem;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    nav ul {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav li {
+      padding: 10px 0;
+    }
+
+    .eventCard {
+      width: 95%;
+      padding: 15px;
+      margin: 10px auto;
+    }
+
+    table {
+      width: 100%;
+      font-size: 0.9rem;
+    }
+
+    .multi-column {
+      column-count: 1;
+      column-gap: 0;
+      column-rule: none;
+      padding: 10px;
+      margin: 20px;
+    }
+
+    .content-flex {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .content-flex img {
+      width: 90%;
+      max-width: 400px;
+      margin-bottom: 15px;
+    }
+
+    .description {
+      font-size: 1rem;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+  <!-- Task 1: Inline style to make this heading red -->
+  <h1 id="mainHeader" style="color: red;">Local Community Event Portal</h1>
+
+  <!-- Task 6: Navigation menu (ul/li) with styled links -->
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">Events</a></li>
+      <li><a href="#">Volunteers</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Task 3 & 8: Event Card with box model styles -->
+  <section class="eventCard">
+    <h2 class="sectionHeader">Spring Festival 2025</h2>
+    <h3>Celebrate with Us!</h3>
+    <p class="description">
+      Join the community for music, food, and fun in the park. The event is free and open to all ages. Volunteers needed!
+    </p>
+    <button class="cta-button">Sign Up to Volunteer</button>
+  </section>
+
+  <!-- Task 7: Event Admin Table -->
+  <table>
+    <thead>
+      <tr>
+        <th>Event Name</th>
+        <th>Date</th>
+        <th>Volunteers Needed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Spring Festival</td><td>May 15, 2025</td><td>25</td></tr>
+      <tr
