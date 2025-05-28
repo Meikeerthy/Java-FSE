@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Community Event Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #d6e7ff; /* Light blue background */
+      color: #333;
+    }
+    h1 {
+      color: #2d3436;
+    }
+    .event-card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+      margin: 15px;
+      width: 280px;
+      display: inline-block;
+      vertical-align: top;
+      cursor: pointer;
+      outline: none;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+    .event-card:hover,
+    .event-card:focus {
+      background-color: #a9cfff; /* Stronger light blue on hover */
+      box-shadow: 0 0 20px 5px rgba(50, 115, 220, 0.5);
+      transform: translateY(-5px);
+    }
+    .event-card.selected {
+      background-color: #d4e6ff; /* Darker blue for selected */
+      box-shadow: 0 0 25px 6px #1a73e8;
+      transform: translateY(-5px);
+      color: white;
+    }
+
+    .form-container {
+      margin-top: 30px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      max-width: 500px;
+    }
+    .form-container input, select, button {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+    button {
+      background: #0984e3;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+    button:hover {
+      background: #74b9ff;
+    }
+    #spinner {
+      display: none;
+      margin: 10px 0;
+    }
+    .success, .error {
+      padding: 10px;
+      border-radius: 6px;
+      margin-top: 10px;
+    }
+    .success { background: #d4edda; color: #155724; }
+    .error { background: #f8d7da; color: #721c24; }
+  </style>
+</head>
+<body>
+  <h1>Community Event Portal</h1>
+
+  <label>Filter by Category:
+    <select id="categoryFilter">
+      <option value="all">All</option>
+      <option value="Music">Music</option>
+      <option value="Workshop">Workshop</option>
+      <option value="Seminar">Seminar</option>
+    </select>
+  </label>
+
+  <label>Search by Name:
+    <input type="text" id="searchInput" placeholder="Search event..." />
+  </label>
+
+  <div id="eventsContainer" tabindex="0"></div>
+
+  <div class="form-container">
+    <h2>Register for Event</h2>
+    <form id="registrationForm">
+      <label>Name: <input type="text" name="name" required /></label>
+      <label>Email: <input type="email" name="email" required /></label>
+      <label>Event:
+        <select name="event" id="eventSelect" required></select>
+      </label>
+      <button type="submit">Register</button>
+    </form>
+    <div id="spinner">Submitting...</div>
+    <div id="message"></div>
+  </div>
+
+  <script src="main.js"></script>
+</body>
+</html>
