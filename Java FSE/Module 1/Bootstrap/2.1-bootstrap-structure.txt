@@ -1,0 +1,4 @@
+Bootstrap Downloaded Directory Structure:
+- css/: Contains compiled CSS files like bootstrap.min.css.
+- js/: Contains compiled JavaScript files like bootstrap.bundle.min.js.
+- icons/: Contains Bootstrap icons in SVG format.
